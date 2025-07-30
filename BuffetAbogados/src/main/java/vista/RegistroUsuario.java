@@ -26,7 +26,7 @@ public class RegistroUsuario extends JDialog {
     public RegistroUsuario(JFrame parent) {
         super(parent, "Registro de Usuario", true);
         this.parent = parent;
-        this.controller = new LoginController();
+        this.controller = new LoginController(null);
         
         initComponents();
         setupEventListeners();
@@ -178,20 +178,20 @@ public class RegistroUsuario extends JDialog {
             String rol = (String) cmbRol.getSelectedItem();
             
             // Validaciones
-            if (Validaciones.esCampoVacio(nombres, "Nombres") ||
-                Validaciones.esCampoVacio(apellidos, "Apellidos") ||
-                Validaciones.esCampoVacio(usuario, "Usuario") ||
-                Validaciones.esCampoVacio(password, "Contraseña")) {
+            if (Validaciones.campoVacio(nombres) ||
+                Validaciones.campoVacio(apellidos) ||
+                Validaciones.campoVacio(usuario) ||
+                Validaciones.campoVacio(password)) {
                 lblMensaje.setText("Todos los campos son obligatorios");
                 return;
             }
             
-            if (!Validaciones.esNombreValido(nombres)) {
+            if (!Validaciones.nombreValido(nombres)) {
                 lblMensaje.setText("Nombres contiene caracteres inválidos");
                 return;
             }
             
-            if (!Validaciones.esNombreValido(apellidos)) {
+            if (!Validaciones.nombreValido(apellidos)) {
                 lblMensaje.setText("Apellidos contiene caracteres inválidos");
                 return;
             }
@@ -201,7 +201,7 @@ public class RegistroUsuario extends JDialog {
                 return;
             }
             
-            if (!Validaciones.esPasswordValido(password)) {
+            if (!Validaciones.passwordValida(password)) {
                 lblMensaje.setText("La contraseña debe tener al menos 6 caracteres");
                 return;
             }
