@@ -252,10 +252,8 @@ public class Login extends JFrame {
     }
     
     private void abrirRegistro() {
-        // TODO: Implementar ventana de registro
-        JOptionPane.showMessageDialog(this,
-            "Funcionalidad de registro en desarrollo",
-            "Información", JOptionPane.INFORMATION_MESSAGE);
+        RegistroUsuario registroDialog = new RegistroUsuario(this);
+        registroDialog.setVisible(true);
     }
     
     private void abrirRecuperacionPassword() {
@@ -271,10 +269,14 @@ public class Login extends JFrame {
     }
     
     private void abrirDashboard(String usuario, String rol) {
-        // TODO: Implementar dashboard
-        JOptionPane.showMessageDialog(this,
-            "Dashboard en desarrollo\nUsuario: " + usuario + "\nRol: " + rol,
-            "Información", JOptionPane.INFORMATION_MESSAGE);
+        // Crear objeto usuario para el dashboard
+        modelo.Usuario usuarioObj = new modelo.Usuario("Administrador", "Sistema", usuario, "admin123", rol);
+        
+        // Cerrar la ventana de login
+        this.dispose();
+        
+        // Abrir dashboard
+        new Dashboard(usuarioObj);
     }
     
     public static void main(String[] args) {
