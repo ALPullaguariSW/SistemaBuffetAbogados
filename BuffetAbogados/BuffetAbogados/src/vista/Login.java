@@ -4,6 +4,7 @@
  */
 package vista;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -326,7 +327,7 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         //</editor-fold>
         SwingUtilities.invokeLater(new Runnable() {
