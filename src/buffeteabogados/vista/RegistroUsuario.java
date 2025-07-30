@@ -1,8 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package buffeteabogados.vista;
+
 import buffeteabogados.modelo.Usuario;
 import buffeteabogados.controlador.LoginController;
 import buffeteabogados.util.Validaciones;
@@ -13,10 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
+ * Ventana de registro de usuarios
  * @author axel_
  */
-public class RegistroUsuario extends javax.swing.JDialog {
+public class RegistroUsuario extends JDialog {
     
     private JTextField txtNombres;
     private JTextField txtApellidos;
@@ -29,14 +26,11 @@ public class RegistroUsuario extends javax.swing.JDialog {
     private JLabel lblEstado;
     
     private LoginController controller;
-    private JFrame parent;
+    private JFrame parentFrame;
     
-    /**
-     * Creates new form RegistroUsuario
-     */
     public RegistroUsuario(JFrame parent) {
         super(parent, "Registro de Usuario", true);
-        this.parent = parent;
+        this.parentFrame = parent;
         this.controller = new LoginController((Login) parent);
         
         inicializarComponentes();
