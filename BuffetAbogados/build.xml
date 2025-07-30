@@ -7,7 +7,7 @@
     <property name="build.dir" value="build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="jar.file" value="${build.dir}/BuffetAbogados.jar"/>
-    <property name="main.class" value="main.java.BuffetAbogados"/>
+    <property name="main.class" value="BuffetAbogados"/>
     
     <!-- Targets -->
     <target name="init">

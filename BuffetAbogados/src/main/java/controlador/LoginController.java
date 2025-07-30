@@ -1,8 +1,8 @@
-package main.java.controlador;
+package buffetabogados.controlador;
 
-import main.java.modelo.Conexion;
-import main.java.modelo.Usuario;
-import main.java.util.Validaciones;
+import buffetabogados.modelo.Conexion;
+import buffetabogados.modelo.Usuario;
+import buffetabogados.util.Validaciones;
 
 import java.sql.*;
 import javax.swing.JOptionPane;

@@ -1,4 +1,4 @@
-package main.java.util;
+package buffetabogados.util;
 
 import java.util.regex.Pattern;
 

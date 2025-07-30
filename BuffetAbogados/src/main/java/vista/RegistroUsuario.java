@@ -178,10 +178,10 @@ public class RegistroUsuario extends JDialog {
             String rol = (String) cmbRol.getSelectedItem();
             
             // Validaciones
-            if (Validaciones.campoVacio(nombres, "Nombres") ||
-                Validaciones.campoVacio(apellidos, "Apellidos") ||
-                Validaciones.campoVacio(usuario, "Usuario") ||
-                Validaciones.campoVacio(password, "Contraseña")) {
+            if (Validaciones.campoVacio(nombres) ||
+                Validaciones.campoVacio(apellidos) ||
+                Validaciones.campoVacio(usuario) ||
+                Validaciones.campoVacio(password)) {
                 lblMensaje.setText("Todos los campos son obligatorios");
                 return;
             }
