@@ -187,6 +187,7 @@ public class Conexion {
                     usuario VARCHAR(50) UNIQUE NOT NULL,
                     password VARCHAR(255) NOT NULL,
                     rol VARCHAR(20) NOT NULL,
+                    activo BOOLEAN DEFAULT 1,
                     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             """;
@@ -261,8 +262,8 @@ public class Conexion {
             
             // Insertar usuario administrador por defecto
             String insertarAdmin = """
-                INSERT OR IGNORE INTO usuarios (nombres, apellidos, usuario, password, rol)
-                VALUES ('Administrador', 'Sistema', 'admin', 'admin123', 'Abogado')
+                INSERT OR IGNORE INTO usuarios (nombres, apellidos, usuario, password, rol, activo)
+                VALUES ('Administrador', 'Sistema', 'admin', 'admin123', 'Abogado', 1)
             """;
             stmt.execute(insertarAdmin);
             
