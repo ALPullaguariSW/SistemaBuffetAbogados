@@ -1,4 +1,4 @@
-import vista.Login;
+import main.java.vista.Login;
 
 /**
  * Clase principal del sistema de Buffet de Abogados

@@ -1,6 +1,6 @@
-package vista;
+package main.java.vista;
 
-import modelo.Usuario;
+import main.java.modelo.Usuario;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

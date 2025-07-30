@@ -1,7 +1,7 @@
-package vista;
+package main.java.vista;
 
-import modelo.Conexion;
-import util.Validaciones;
+import main.java.modelo.Conexion;
+import main.java.util.Validaciones;
 
 import javax.swing.*;
 import java.awt.*;

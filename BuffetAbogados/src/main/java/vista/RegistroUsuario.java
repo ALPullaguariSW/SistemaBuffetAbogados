@@ -1,8 +1,8 @@
-package vista;
+package main.java.vista;
 
-import controlador.LoginController;
-import modelo.Usuario;
-import util.Validaciones;
+import main.java.controlador.LoginController;
+import main.java.modelo.Usuario;
+import main.java.util.Validaciones;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
