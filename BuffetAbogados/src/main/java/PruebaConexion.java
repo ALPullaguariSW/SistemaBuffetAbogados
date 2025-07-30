@@ -1,4 +1,4 @@
-import modelo.Conexion;
+import buffetabogados.modelo.Conexion;
 import java.sql.Connection;
 
 public class PruebaConexion {
