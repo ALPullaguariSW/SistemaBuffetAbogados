@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_buffet
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: pwd123
+      MYSQL_DATABASE: buffet_abogados
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - buffet_net
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin_buffet
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: pwd123
+    depends_on:
+      - mysql
+    networks:
+      - buffet_net
+
+volumes:
+  mysql_data:
+
+networks:
+  buffet_net:

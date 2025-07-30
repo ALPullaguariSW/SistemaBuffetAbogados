@@ -1,32 +1,110 @@
 # Sistema de Buffet de Abogados
 
-Sistema completo de gestión para un buffet de abogados desarrollado en Java con arquitectura MVC, utilizando Java Swing para la interfaz gráfica.
+Sistema completo de gestión para un buffet de abogados desarrollado en Java con arquitectura MVC, utilizando Java Swing para la interfaz gráfica. El sistema cuenta con una estandarización completa de estilos profesionales y soporte para múltiples bases de datos.
+
+## 🎨 Sistema de Estilos Estandarizado
+
+El proyecto implementa un sistema de estilos completamente estandarizado a través de la clase `EstilosSistema.java` que proporciona:
+
+### Paleta de Colores Profesional
+- **Color Primario**: Azul marino profundo (#1C3350) - Confianza y seriedad
+- **Color Secundario**: Gris pizarra (#708090) - Neutralidad y profesionalismo  
+- **Color de Acento**: Dorado pálido (#CDB380) - Prestigio y éxito
+- **Colores de Estado**: Verde bosque (éxito), Rojo ladrillo (error), Naranja oscuro (advertencia)
+
+### Componentes Pre-estilizados
+- `crearBotonPrincipal()` - Botones de acción primaria
+- `crearBotonSecundario()` - Botones de acción secundaria
+- `crearCampoTexto()` - Campos de texto con placeholders
+- `crearAreaTexto()` - Áreas de texto estilizadas
+- `crearPanelTarjeta()` - Paneles con diseño de tarjeta
+- `crearLabelTitulo()` - Etiquetas de título
+- `estilizarTabla()` - Tablas con diseño profesional
 
 ## 🏗️ Arquitectura
 
 El proyecto sigue el patrón Modelo-Vista-Controlador (MVC):
 
-- **`modelo/`**: Clases de datos y lógica de negocio
-- **`vista/`**: Interfaces gráficas con Java Swing
+- **`modelo/`**: Clases de datos y DAOs para acceso a base de datos
+- **`vista/`**: Interfaces gráficas con Java Swing estandarizadas
 - **`controlador/`**: Controladores de eventos y lógica de presentación
-- **`util/`**: Utilidades, conexión a BD y validaciones
+- **`util/`**: Utilidades, conexión a BD, validaciones y estilos
 
 ## 🗄️ Base de Datos
 
 El sistema soporta múltiples motores de base de datos:
 
-- **MySQL**: Para entornos de producción
+- **MySQL**: Para entornos de producción (configurado por defecto)
 - **PostgreSQL**: Para entornos empresariales
-- **SQLite**: Para desarrollo local (modo por defecto)
+- **SQLite**: Para desarrollo local
 
 ### Configuración de Base de Datos
 
+#### Opción 1: Docker (Recomendado)
+El proyecto incluye un archivo `docker-compose.yml` que configura automáticamente:
+
+```bash
+# Iniciar servicios de base de datos
+docker-compose up -d
+
+# Acceder a phpMyAdmin
+# URL: http://localhost:8080
+# Usuario: root
+# Contraseña: pwd123
+```
+
+#### Opción 2: Configuración Manual
 1. Ejecutar la aplicación
 2. Hacer clic en "Configurar Conexión"
 3. Seleccionar el tipo de base de datos
 4. Ingresar los parámetros de conexión
 5. Probar la conexión
 6. Guardar la configuración
+
+### Esquema de Base de Datos
+
+El proyecto incluye un archivo `database_schema.sql` con el esquema completo de la base de datos:
+
+#### Tablas Principales
+- **`usuarios`**: Usuarios del sistema con roles y autenticación
+- **`clientes`**: Información completa de clientes del buffet
+- **`empleados`**: Personal del buffet con roles y especialidades
+- **`casos`**: Casos legales con asignación de clientes y empleados
+- **`audiencias`**: Programación de audiencias con fechas y lugares
+
+#### Características del Esquema
+- **Relaciones**: Claves foráneas entre tablas para integridad referencial
+- **Índices**: Optimización para búsquedas frecuentes
+- **Vistas**: Vistas predefinidas para consultas complejas
+- **Datos de ejemplo**: Incluye datos iniciales para pruebas
+- **Restricciones**: Validaciones a nivel de base de datos
+
+#### Ejecutar el Esquema
+```sql
+-- En MySQL/phpMyAdmin
+SOURCE database_schema.sql;
+
+-- O importar directamente desde phpMyAdmin
+-- File: database_schema.sql
+```
+
+## 📦 Archivos JAR Incluidos
+
+El proyecto incluye los siguientes archivos JAR necesarios:
+
+- **`sqlite-jdbc-3.50.3.0.jar`** (14MB) - Driver para SQLite
+- **`mysql-connector-j-9.4.0.jar`** (2.5MB) - Driver para MySQL
+- **`flatlaf-3.6.jar`** (904KB) - Look and Feel moderno
+
+### Configuración en NetBeans
+
+Los archivos JAR están configurados en `nbproject/project.properties`:
+
+```properties
+file.reference.flatlaf-3.6.jar=D:\\flatlaf-3.6.jar
+file.reference.mysql-connector-j-9.4.0.jar=D:\\mysql-connector-j-9.4.0\\mysql-connector-j-9.4.0\\mysql-connector-j-9.4.0.jar
+file.reference.sqlite-jdbc-3.50.3.0.jar=D:\\sqlite-jdbc-3.50.3.0.jar
+```
 
 ## 👤 Usuarios y Roles
 
@@ -51,12 +129,12 @@ El sistema soporta múltiples motores de base de datos:
 ### 2. Gestión de Clientes
 - Registro con validaciones completas
 - Campos: Nombres, Apellidos, Dirección, Teléfono, Correo, DUI, Fecha de nacimiento
-- CRUD completo con tabla de datos
+- CRUD completo con tabla de datos estilizada
 
 ### 3. Gestión de Empleados
 - Registro con información detallada
 - Campos: Nombres, Apellidos, Teléfono, DUI, Fecha de nacimiento, Género, Provincia, Tipo de empleado, Estado civil
-- CRUD completo con tabla de datos
+- CRUD completo con tabla de datos estilizada
 
 ### 4. Gestión de Casos
 - Creación y seguimiento de casos legales
@@ -84,16 +162,17 @@ El sistema soporta múltiples motores de base de datos:
 ## 📋 Requisitos del Sistema
 
 ### Software Requerido
-- **Java**: JDK 8 o superior
+- **Java**: JDK 24 o superior
 - **NetBeans**: IDE recomendado (opcional)
+- **Docker**: Para servicios de base de datos (opcional)
 - **Base de Datos**: MySQL, PostgreSQL o SQLite
 
 ### Drivers de Base de Datos
-Para usar MySQL o PostgreSQL, agregar los drivers correspondientes al classpath:
+Los drivers están incluidos en el proyecto:
 
-- **MySQL**: `mysql-connector-java-8.0.xx.jar`
-- **PostgreSQL**: `postgresql-42.x.x.jar`
-- **SQLite**: `sqlite-jdbc-3.xx.x.jar` (incluido por defecto)
+- **MySQL**: `mysql-connector-j-9.4.0.jar` ✅
+- **SQLite**: `sqlite-jdbc-3.50.3.0.jar` ✅
+- **PostgreSQL**: Requiere descarga adicional
 
 ## 🛠️ Instalación y Configuración
 
@@ -107,13 +186,28 @@ cd BuffetAbogados
 1. Abrir NetBeans
 2. File → Open Project
 3. Seleccionar la carpeta `BuffetAbogados`
-4. Configurar como proyecto Java con Ant
+4. El proyecto se configura automáticamente con los JARs incluidos
 
-### 3. Configurar Drivers de BD (Opcional)
-Si usará MySQL o PostgreSQL:
-1. Descargar el driver correspondiente
-2. Agregar al classpath del proyecto
-3. Configurar en NetBeans: Properties → Libraries → Add JAR/Folder
+### 3. Configurar Base de Datos
+
+#### Opción A: Usar Docker (Recomendado)
+```bash
+# Iniciar servicios
+docker-compose up -d
+
+# Verificar que los servicios estén corriendo
+docker-compose ps
+
+# Importar esquema de base de datos
+# Acceder a phpMyAdmin: http://localhost:8080
+# Importar archivo: database_schema.sql
+```
+
+#### Opción B: Configuración Manual
+1. Instalar MySQL/PostgreSQL localmente
+2. Crear base de datos `buffet_abogados`
+3. Configurar usuario y contraseña
+4. Importar el esquema desde `database_schema.sql`
 
 ### 4. Ejecutar la Aplicación
 1. Ejecutar la clase `BuffetAbogados`
@@ -151,30 +245,58 @@ Si usará MySQL o PostgreSQL:
 ```
 BuffetAbogados/
 ├── src/
-│   └── main/
-│       └── java/
-│           ├── BuffetAbogados.java          # Clase principal
-│           ├── modelo/                       # Modelos de datos
-│           │   ├── Conexion.java
-│           │   ├── Usuario.java
-│           │   ├── Cliente.java
-│           │   ├── Empleado.java
-│           │   ├── Caso.java
-│           │   └── Audiencia.java
-│           ├── vista/                        # Interfaces gráficas
-│           │   ├── Login.java
-│           │   ├── ConfiguracionConexion.java
-│           │   └── [Otras vistas...]
-│           ├── controlador/                  # Controladores
-│           │   └── [Controladores...]
-│           └── util/                         # Utilidades
-│               └── Validaciones.java
+│   └── buffeteabogados/
+│       ├── BuffetAbogados.java              # Clase principal
+│       ├── modelo/                           # Modelos de datos
+│       │   ├── Conexion.java                 # Gestión de conexiones BD
+│       │   ├── Usuario.java
+│       │   ├── Cliente.java
+│       │   ├── Empleado.java
+│       │   ├── Caso.java
+│       │   ├── Audiencia.java
+│       │   └── [DAO classes...]              # Data Access Objects
+│       ├── vista/                            # Interfaces gráficas
+│       │   ├── Login.java                    # Pantalla de login
+│       │   ├── Dashboard.java                # Panel principal
+│       │   ├── ConfiguracionConexion.java    # Configuración BD
+│       │   ├── GestionClientes.java          # Gestión de clientes
+│       │   ├── GestionEmpleados.java         # Gestión de empleados
+│       │   ├── GestionCasos.java             # Gestión de casos
+│       │   ├── GestionAudiencias.java        # Gestión de audiencias
+│       │   ├── GestionReportes.java          # Generación de reportes
+│       │   ├── RegistroUsuario.java          # Registro de usuarios
+│       │   └── RecuperacionPassword.java     # Recuperación de contraseña
+│       ├── controlador/                      # Controladores
+│       │   ├── ClienteController.java
+│       │   ├── EmpleadoController.java
+│       │   ├── CasoController.java
+│       │   ├── AudienciaController.java
+│       │   └── ReporteController.java
+│       └── util/                             # Utilidades
+│           ├── EstilosSistema.java           # Sistema de estilos
+│           └── Validaciones.java             # Validaciones
+├── nbproject/                                # Configuración NetBeans
+│   ├── project.properties                    # Propiedades del proyecto
+│   ├── project.xml                          # Configuración XML
+│   └── build-impl.xml                       # Scripts de build
 ├── configuracion.properties                 # Configuración de BD
-├── buffet_abogados.db                       # Base SQLite (se crea automáticamente)
+├── database_schema.sql                      # Esquema completo de BD
+├── docker-compose.yml                       # Servicios Docker
+├── build.xml                                # Script de build Ant
+├── manifest.mf                              # Manifest del JAR
+├── sqlite-jdbc-3.50.3.0.jar                 # Driver SQLite
+├── mysql-connector-j-9.4.0.jar              # Driver MySQL
+├── flatlaf-3.6.jar                          # Look and Feel moderno
 └── README.md
 ```
 
 ## 🔧 Características Técnicas
+
+### Sistema de Estilos
+- **Paleta de colores profesional** orientada a servicios legales
+- **Componentes pre-estilizados** para consistencia visual
+- **Look and Feel moderno** con FlatLaf
+- **Responsive design** adaptado a diferentes resoluciones
 
 ### Validaciones Implementadas
 - Campos obligatorios
@@ -192,10 +314,41 @@ BuffetAbogados/
 - Logs de errores en consola
 
 ### Interfaz de Usuario
-- Diseño moderno y intuitivo
-- Navegación clara
-- Botones con iconos y colores
-- Responsive y accesible
+- Diseño moderno y profesional
+- Navegación clara e intuitiva
+- Botones con iconos y colores estandarizados
+- Tablas con diseño profesional
+- Formularios con validación visual
+
+## 🐳 Servicios Docker
+
+El proyecto incluye configuración Docker para facilitar el desarrollo:
+
+### Servicios Disponibles
+- **MySQL 8.0**: Base de datos principal
+- **phpMyAdmin**: Interfaz web para gestión de BD
+
+### Comandos Docker
+```bash
+# Iniciar servicios
+docker-compose up -d
+
+# Ver logs
+docker-compose logs
+
+# Detener servicios
+docker-compose down
+
+# Reconstruir servicios
+docker-compose up -d --build
+```
+
+### Configuración por Defecto
+- **MySQL**: localhost:3306
+- **phpMyAdmin**: http://localhost:8080
+- **Usuario**: root
+- **Contraseña**: pwd123
+- **Base de datos**: buffet_abogados
 
 ## 🚧 Funcionalidades en Desarrollo
 
@@ -205,6 +358,7 @@ BuffetAbogados/
 - Reportes PDF avanzados
 - Sistema de notificaciones
 - Backup automático de datos
+- Integración con sistemas externos
 
 ## 📞 Soporte
 
@@ -219,4 +373,4 @@ Este proyecto está desarrollado para fines educativos y de demostración.
 
 ---
 
-**Desarrollado con ❤️ en Java** 
+**Desarrollado con ❤️ en Java con estilos profesionales** 
