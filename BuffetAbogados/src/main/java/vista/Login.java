@@ -1,10 +1,10 @@
-package main.java.vista;
+package buffetabogados.vista;
 
-import main.java.controlador.LoginController;
-import main.java.modelo.Usuario;
-import main.java.vista.ConfiguracionConexion;
-import main.java.vista.Dashboard;
-import main.java.vista.RegistroUsuario;
+import buffetabogados.controlador.LoginController;
+import buffetabogados.modelo.Usuario;
+import buffetabogados.vista.ConfiguracionConexion;
+import buffetabogados.vista.Dashboard;
+import buffetabogados.vista.RegistroUsuario;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -43,7 +43,7 @@ public class Login extends JFrame {
         
         // Configurar look and feel
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeel());
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }

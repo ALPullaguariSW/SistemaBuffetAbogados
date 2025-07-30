@@ -1,7 +1,7 @@
-package main.java.vista;
+package buffetabogados.vista;
 
-import main.java.modelo.Conexion;
-import main.java.util.Validaciones;
+import buffetabogados.modelo.Conexion;
+import buffetabogados.util.Validaciones;
 
 import javax.swing.*;
 import java.awt.*;

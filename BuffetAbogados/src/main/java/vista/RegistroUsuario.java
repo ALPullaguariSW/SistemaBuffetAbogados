@@ -1,8 +1,8 @@
-package main.java.vista;
+package buffetabogados.vista;
 
-import main.java.controlador.LoginController;
-import main.java.modelo.Usuario;
-import main.java.util.Validaciones;
+import buffetabogados.controlador.LoginController;
+import buffetabogados.modelo.Usuario;
+import buffetabogados.util.Validaciones;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -178,30 +178,30 @@ public class RegistroUsuario extends JDialog {
             String rol = (String) cmbRol.getSelectedItem();
             
             // Validaciones
-            if (Validaciones.esCampoVacio(nombres, "Nombres") ||
-                Validaciones.esCampoVacio(apellidos, "Apellidos") ||
-                Validaciones.esCampoVacio(usuario, "Usuario") ||
-                Validaciones.esCampoVacio(password, "Contraseña")) {
+            if (Validaciones.campoVacio(nombres, "Nombres") ||
+                Validaciones.campoVacio(apellidos, "Apellidos") ||
+                Validaciones.campoVacio(usuario, "Usuario") ||
+                Validaciones.campoVacio(password, "Contraseña")) {
                 lblMensaje.setText("Todos los campos son obligatorios");
                 return;
             }
             
-            if (!Validaciones.esNombreValido(nombres)) {
-                lblMensaje.setText("Nombres contiene caracteres inválidos");
+            if (!Validaciones.nombreValido(nombres)) {
+                lblMensaje.setText("El nombre solo puede contener letras y espacios");
                 return;
             }
             
-            if (!Validaciones.esNombreValido(apellidos)) {
-                lblMensaje.setText("Apellidos contiene caracteres inválidos");
+            if (!Validaciones.nombreValido(apellidos)) {
+                lblMensaje.setText("Los apellidos solo pueden contener letras y espacios");
                 return;
             }
             
-            if (usuario.length() < 4) {
-                lblMensaje.setText("El usuario debe tener al menos 4 caracteres");
+            if (!Validaciones.usuarioValido(usuario)) {
+                lblMensaje.setText("El usuario debe tener al menos 3 caracteres y solo contener letras, números y guiones bajos");
                 return;
             }
             
-            if (!Validaciones.esPasswordValido(password)) {
+            if (!Validaciones.passwordValida(password)) {
                 lblMensaje.setText("La contraseña debe tener al menos 6 caracteres");
                 return;
             }

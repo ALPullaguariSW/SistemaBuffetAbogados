@@ -1,4 +1,4 @@
-package main.java.modelo;
+package buffetabogados.modelo;
 
 import java.sql.Date;
 

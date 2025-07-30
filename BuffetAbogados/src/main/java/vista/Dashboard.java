@@ -1,6 +1,6 @@
-package main.java.vista;
+package buffetabogados.vista;
 
-import main.java.modelo.Usuario;
+import buffetabogados.modelo.Usuario;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
