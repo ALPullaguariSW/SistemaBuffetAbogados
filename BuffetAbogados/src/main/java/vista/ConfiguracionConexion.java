@@ -346,4 +346,22 @@ public class ConfiguracionConexion extends JDialog {
         
         return true;
     }
+    
+    /**
+     * Método main para pruebas independientes
+     */
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JFrame parentFrame = new JFrame("Test Parent");
+                parentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                parentFrame.setSize(200, 100);
+                parentFrame.setLocationRelativeTo(null);
+                parentFrame.setVisible(true);
+                
+                new ConfiguracionConexion(parentFrame).setVisible(true);
+            }
+        });
+    }
 } 
