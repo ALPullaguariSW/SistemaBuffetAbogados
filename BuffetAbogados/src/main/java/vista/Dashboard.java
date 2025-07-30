@@ -1,6 +1,6 @@
-package vista;
+package buffetabogados.vista;
 
-import modelo.Usuario;
+import buffetabogados.modelo.Usuario;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -249,5 +249,24 @@ public class Dashboard extends JFrame {
             dispose();
             new Login();
         }
+    }
+    
+    /**
+     * Método main para pruebas independientes
+     */
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                // Crear usuario de prueba
+                buffetabogados.modelo.Usuario usuarioPrueba = new buffetabogados.modelo.Usuario();
+                usuarioPrueba.setNombres("Admin");
+                usuarioPrueba.setApellidos("Sistema");
+                usuarioPrueba.setUsuario("admin");
+                usuarioPrueba.setRol("Abogado");
+                
+                new Dashboard(usuarioPrueba).setVisible(true);
+            }
+        });
     }
 }

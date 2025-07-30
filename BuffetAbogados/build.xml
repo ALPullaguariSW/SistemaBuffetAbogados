@@ -1,124 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="BuffetAbogados" default="default" basedir=".">
-    <description>Builds, tests, and runs the project BuffetAbogados.</description>
+<project name="BuffetAbogados" default="compile" basedir=".">
+    <description>Sistema para Buffet de Abogados</description>
     
-    <import file="nbproject/build-impl.xml"/>
-    
-    <!-- Configuración del proyecto -->
-    <property name="project.name" value="BuffetAbogados"/>
-    <property name="project.version" value="1.0"/>
-    <property name="project.description" value="Sistema de Gestión para Buffet de Abogados"/>
-    
-    <!-- Directorios del proyecto -->
+    <!-- Properties -->
     <property name="src.dir" value="src/main/java"/>
     <property name="build.dir" value="build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
-    <property name="dist.dir" value="dist"/>
-    <property name="lib.dir" value="lib"/>
-    
-    <!-- Configuración de Java -->
-    <property name="java.version" value="1.8"/>
-    <property name="java.encoding" value="UTF-8"/>
-    
-    <!-- Clase principal -->
+    <property name="jar.file" value="${build.dir}/BuffetAbogados.jar"/>
     <property name="main.class" value="BuffetAbogados"/>
     
-    <!-- Crear directorios necesarios -->
+    <!-- Targets -->
     <target name="init">
         <mkdir dir="${build.dir}"/>
         <mkdir dir="${classes.dir}"/>
-        <mkdir dir="${dist.dir}"/>
-        <mkdir dir="${lib.dir}"/>
     </target>
     
-    <!-- Compilar el proyecto -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+    
     <target name="compile" depends="init">
-        <javac srcdir="${src.dir}" 
-               destdir="${classes.dir}" 
-               debug="true" 
-               deprecation="true" 
-               encoding="${java.encoding}"
-               source="${java.version}"
-               target="${java.version}"
-               includeantruntime="false">
+        <javac srcdir="${src.dir}"
+               destdir="${classes.dir}"
+               includeantruntime="false"
+               debug="true">
             <classpath>
-                <fileset dir="${lib.dir}" includes="*.jar"/>
+                <pathelement path="${classes.dir}"/>
             </classpath>
         </javac>
     </target>
     
-    <!-- Crear JAR ejecutable -->
     <target name="jar" depends="compile">
-        <jar destfile="${dist.dir}/${project.name}.jar" basedir="${classes.dir}">
+        <jar destfile="${jar.file}">
+            <fileset dir="${classes.dir}"/>
             <manifest>
                 <attribute name="Main-Class" value="${main.class}"/>
-                <attribute name="Class-Path" value="."/>
             </manifest>
         </jar>
     </target>
     
-    <!-- Ejecutar la aplicación -->
-    <target name="run" depends="jar">
-        <java jar="${dist.dir}/${project.name}.jar" fork="true">
+    <target name="run" depends="compile">
+        <java classname="${main.class}" fork="true">
             <classpath>
-                <fileset dir="${lib.dir}" includes="*.jar"/>
+                <pathelement path="${classes.dir}"/>
             </classpath>
         </java>
     </target>
-    
-    <!-- Limpiar archivos generados -->
-    <target name="clean">
-        <delete dir="${build.dir}"/>
-        <delete dir="${dist.dir}"/>
-    </target>
-    
-    <!-- Target por defecto -->
-    <target name="default" depends="run"/>
-    
-    <!-- Crear documentación -->
-    <target name="javadoc" depends="init">
-        <javadoc sourcepath="${src.dir}" 
-                 destdir="${build.dir}/javadoc" 
-                 encoding="${java.encoding}"
-                 source="${java.version}"
-                 author="true"
-                 version="true"
-                 use="true"
-                 windowtitle="${project.name} API">
-            <classpath>
-                <fileset dir="${lib.dir}" includes="*.jar"/>
-            </classpath>
-        </javadoc>
-    </target>
-    
-    <!-- Crear distribución completa -->
-    <target name="dist" depends="jar,javadoc">
-        <zip destfile="${dist.dir}/${project.name}-${project.version}.zip">
-            <fileset dir="." includes="README.md"/>
-            <fileset dir="${dist.dir}" includes="*.jar"/>
-            <fileset dir="${build.dir}" includes="javadoc/**"/>
-            <fileset dir="${src.dir}" includes="**/*.java"/>
-        </zip>
-    </target>
-    
-    <!-- Verificar dependencias -->
-    <target name="check-dependencies">
-        <echo message="Verificando dependencias..."/>
-        <available file="${lib.dir}/mysql-connector-java-8.0.xx.jar" property="mysql.driver.present"/>
-        <available file="${lib.dir}/postgresql-42.x.x.jar" property="postgresql.driver.present"/>
-        
-        <echo message="MySQL Driver: ${mysql.driver.present}"/>
-        <echo message="PostgreSQL Driver: ${postgresql.driver.present}"/>
-        <echo message="SQLite Driver: Incluido por defecto"/>
-    </target>
-    
-    <!-- Instalar drivers de ejemplo -->
-    <target name="install-sample-drivers">
-        <echo message="Instalando drivers de ejemplo..."/>
-        <echo message="Por favor descargue manualmente los drivers necesarios:"/>
-        <echo message="MySQL: https://dev.mysql.com/downloads/connector/j/"/>
-        <echo message="PostgreSQL: https://jdbc.postgresql.org/download/"/>
-        <echo message="Y colóquelos en la carpeta lib/"/>
-    </target>
-    
 </project> 

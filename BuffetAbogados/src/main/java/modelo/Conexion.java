@@ -1,4 +1,4 @@
-package modelo;
+package buffetabogados.modelo;
 
 import java.sql.*;
 import java.util.Properties;

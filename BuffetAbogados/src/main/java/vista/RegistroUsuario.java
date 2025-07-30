@@ -1,8 +1,8 @@
-package vista;
+package buffetabogados.vista;
 
-import controlador.LoginController;
-import modelo.Usuario;
-import util.Validaciones;
+import buffetabogados.controlador.LoginController;
+import buffetabogados.modelo.Usuario;
+import buffetabogados.util.Validaciones;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -178,30 +178,30 @@ public class RegistroUsuario extends JDialog {
             String rol = (String) cmbRol.getSelectedItem();
             
             // Validaciones
-            if (Validaciones.esCampoVacio(nombres, "Nombres") ||
-                Validaciones.esCampoVacio(apellidos, "Apellidos") ||
-                Validaciones.esCampoVacio(usuario, "Usuario") ||
-                Validaciones.esCampoVacio(password, "Contraseña")) {
+            if (Validaciones.campoVacio(nombres) ||
+                Validaciones.campoVacio(apellidos) ||
+                Validaciones.campoVacio(usuario) ||
+                Validaciones.campoVacio(password)) {
                 lblMensaje.setText("Todos los campos son obligatorios");
                 return;
             }
             
-            if (!Validaciones.esNombreValido(nombres)) {
-                lblMensaje.setText("Nombres contiene caracteres inválidos");
+            if (!Validaciones.nombreValido(nombres)) {
+                lblMensaje.setText("El nombre solo puede contener letras y espacios");
                 return;
             }
             
-            if (!Validaciones.esNombreValido(apellidos)) {
-                lblMensaje.setText("Apellidos contiene caracteres inválidos");
+            if (!Validaciones.nombreValido(apellidos)) {
+                lblMensaje.setText("Los apellidos solo pueden contener letras y espacios");
                 return;
             }
             
-            if (usuario.length() < 4) {
-                lblMensaje.setText("El usuario debe tener al menos 4 caracteres");
+            if (!Validaciones.usuarioValido(usuario)) {
+                lblMensaje.setText("El usuario debe tener al menos 3 caracteres y solo contener letras, números y guiones bajos");
                 return;
             }
             
-            if (!Validaciones.esPasswordValido(password)) {
+            if (!Validaciones.passwordValida(password)) {
                 lblMensaje.setText("La contraseña debe tener al menos 6 caracteres");
                 return;
             }
@@ -235,5 +235,23 @@ public class RegistroUsuario extends JDialog {
             ex.printStackTrace();
             lblMensaje.setText("Error interno del sistema");
         }
+    }
+    
+    /**
+     * Método main para pruebas independientes
+     */
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JFrame parentFrame = new JFrame("Test Parent");
+                parentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                parentFrame.setSize(200, 100);
+                parentFrame.setLocationRelativeTo(null);
+                parentFrame.setVisible(true);
+                
+                new RegistroUsuario(parentFrame).setVisible(true);
+            }
+        });
     }
 }

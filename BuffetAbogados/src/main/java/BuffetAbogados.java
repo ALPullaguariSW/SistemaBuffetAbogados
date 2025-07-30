@@ -1,4 +1,4 @@
-import vista.Login;
+import buffetabogados.vista.Login;
 
 /**
  * Clase principal del sistema de Buffet de Abogados
@@ -10,7 +10,7 @@ public class BuffetAbogados {
         // Configurar look and feel del sistema
         try {
             javax.swing.UIManager.setLookAndFeel(
-                javax.swing.UIManager.getSystemLookAndFeel()
+                javax.swing.UIManager.getSystemLookAndFeelClassName()
             );
         } catch (Exception e) {
             System.err.println("Error al configurar look and feel: " + e.getMessage());

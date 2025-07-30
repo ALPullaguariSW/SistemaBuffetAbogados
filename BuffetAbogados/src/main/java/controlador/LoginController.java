@@ -1,23 +1,21 @@
-package controlador;
+package buffetabogados.controlador;
 
-import modelo.Usuario;
-import modelo.Conexion;
-import util.Validaciones;
-import vista.Login;
+import buffetabogados.modelo.Conexion;
+import buffetabogados.modelo.Usuario;
+import buffetabogados.util.Validaciones;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
+import java.security.SecureRandom;
 
 /**
  * Controlador para la autenticación de usuarios
  */
 public class LoginController {
     
-    private Login vista;
     private Conexion conexion;
     
-    public LoginController(Login vista) {
-        this.vista = vista;
+    public LoginController() {
         this.conexion = Conexion.getInstancia();
     }
     
@@ -27,7 +25,7 @@ public class LoginController {
     public Usuario autenticarUsuario(String usuario, String password) {
         // Validaciones básicas
         if (Validaciones.campoVacio(usuario) || Validaciones.campoVacio(password)) {
-            JOptionPane.showMessageDialog(vista,
+            JOptionPane.showMessageDialog(null,
                 "Por favor complete todos los campos",
                 "Error", JOptionPane.ERROR_MESSAGE);
             return null;
@@ -68,7 +66,7 @@ public class LoginController {
             } else {
                 rs.close();
                 pstmt.close();
-                JOptionPane.showMessageDialog(vista,
+                JOptionPane.showMessageDialog(null,
                     "Usuario o contraseña incorrectos",
                     "Error", JOptionPane.ERROR_MESSAGE);
                 return null;
@@ -76,7 +74,7 @@ public class LoginController {
             
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(vista,
+            JOptionPane.showMessageDialog(null,
                 "Error de conexión a la base de datos: " + e.getMessage(),
                 "Error", JOptionPane.ERROR_MESSAGE);
             return null;
@@ -89,28 +87,28 @@ public class LoginController {
     public boolean registrarUsuario(Usuario usuario) {
         // Validaciones
         if (!Validaciones.nombreValido(usuario.getNombres())) {
-            JOptionPane.showMessageDialog(vista,
+            JOptionPane.showMessageDialog(null,
                 "Los nombres solo pueden contener letras y espacios",
                 "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
         if (!Validaciones.nombreValido(usuario.getApellidos())) {
-            JOptionPane.showMessageDialog(vista,
+            JOptionPane.showMessageDialog(null,
                 "Los apellidos solo pueden contener letras y espacios",
                 "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
         if (!Validaciones.usuarioValido(usuario.getUsuario())) {
-            JOptionPane.showMessageDialog(vista,
+            JOptionPane.showMessageDialog(null,
                 "El usuario debe contener al menos 3 caracteres (letras, números y guiones bajos)",
                 "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
         if (!Validaciones.passwordValida(usuario.getPassword())) {
-            JOptionPane.showMessageDialog(vista,
+            JOptionPane.showMessageDialog(null,
                 "La contraseña debe tener al menos 6 caracteres",
                 "Error", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -118,7 +116,7 @@ public class LoginController {
         
         // Verificar si el usuario ya existe
         if (usuarioExiste(usuario.getUsuario())) {
-            JOptionPane.showMessageDialog(vista,
+            JOptionPane.showMessageDialog(null,
                 "El usuario ya existe en el sistema",
                 "Error", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -141,12 +139,12 @@ public class LoginController {
             pstmt.close();
             
             if (resultado > 0) {
-                JOptionPane.showMessageDialog(vista,
+                JOptionPane.showMessageDialog(null,
                     "Usuario registrado exitosamente",
                     "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 return true;
             } else {
-                JOptionPane.showMessageDialog(vista,
+                JOptionPane.showMessageDialog(null,
                     "Error al registrar el usuario",
                     "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
@@ -154,7 +152,7 @@ public class LoginController {
             
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(vista,
+            JOptionPane.showMessageDialog(null,
                 "Error de conexión a la base de datos: " + e.getMessage(),
                 "Error", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -229,7 +227,7 @@ public class LoginController {
      */
     public boolean actualizarPassword(String usuario, String nuevaPassword) {
         if (!Validaciones.passwordValida(nuevaPassword)) {
-            JOptionPane.showMessageDialog(vista,
+            JOptionPane.showMessageDialog(null,
                 "La contraseña debe tener al menos 6 caracteres",
                 "Error", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -247,12 +245,12 @@ public class LoginController {
             pstmt.close();
             
             if (resultado > 0) {
-                JOptionPane.showMessageDialog(vista,
+                JOptionPane.showMessageDialog(null,
                     "Contraseña actualizada exitosamente",
                     "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 return true;
             } else {
-                JOptionPane.showMessageDialog(vista,
+                JOptionPane.showMessageDialog(null,
                     "Error al actualizar la contraseña",
                     "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
@@ -260,7 +258,7 @@ public class LoginController {
             
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(vista,
+            JOptionPane.showMessageDialog(null,
                 "Error de conexión a la base de datos: " + e.getMessage(),
                 "Error", JOptionPane.ERROR_MESSAGE);
             return false;

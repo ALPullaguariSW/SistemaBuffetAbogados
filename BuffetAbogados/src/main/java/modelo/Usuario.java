@@ -1,4 +1,4 @@
-package modelo;
+package buffetabogados.modelo;
 
 import java.sql.Date;
 
@@ -13,6 +13,7 @@ public class Usuario {
     private String password;
     private String rol;
     private Date fechaCreacion;
+    private boolean activo = true; // Campo para estado activo/inactivo
     
     // Constructor por defecto
     public Usuario() {}
@@ -92,6 +93,14 @@ public class Usuario {
     
     public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
+    }
+    
+    public boolean isActivo() {
+        return activo;
+    }
+    
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
     
     /**
