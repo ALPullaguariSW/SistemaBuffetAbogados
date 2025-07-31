@@ -213,6 +213,41 @@ docker-compose ps
 1. Ejecutar la clase `BuffetAbogados`
 2. O hacer clic en "Run Project" en NetBeans
 
+## 📸 Capturas de Pantalla del Sistema
+
+### 🖥️ Interfaz Principal
+![Login del Sistema](images/login.png)
+*Pantalla de inicio de sesión con estilos profesionales*
+
+![Dashboard Principal](images/dashboard.png)
+*Panel principal con módulos organizados*
+
+### 👥 Gestión de Datos
+![Gestión de Clientes](images/gestion-clientes.png)
+*Formulario de gestión de clientes con validaciones*
+
+![Gestión de Empleados](images/gestion-empleados.png)
+*Interfaz para administración de empleados*
+
+![Gestión de Casos](images/gestion-casos.png)
+*Formulario completo de casos legales*
+
+![Gestión de Audiencias](images/gestion-audiencias.png)
+*Programación de audiencias con calendario*
+
+### ⚙️ Configuración
+![Configuración de Base de Datos](images/configuracion-bd.png)
+*Panel de configuración de conexión a BD*
+
+![Recuperación de Contraseña](images/recuperacion-password.png)
+*Sistema de recuperación de contraseña*
+
+### 📊 Reportes
+![Generación de Reportes](images/reportes.png)
+*Módulo de generación de reportes PDF*
+
+---
+
 ## 🎯 Uso del Sistema
 
 ### Primer Inicio
@@ -287,6 +322,11 @@ BuffetAbogados/
 ├── sqlite-jdbc-3.50.3.0.jar                 # Driver SQLite
 ├── mysql-connector-j-9.4.0.jar              # Driver MySQL
 ├── flatlaf-3.6.jar                          # Look and Feel moderno
+├── images/                                   # Capturas de pantalla
+│   ├── README.md                            # Instrucciones para imágenes
+│   ├── login.png                            # Pantalla de login
+│   ├── dashboard.png                        # Dashboard principal
+│   └── [Otras capturas...]                  # Demás imágenes del sistema
 └── README.md
 ```
 

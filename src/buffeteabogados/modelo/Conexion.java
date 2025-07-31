@@ -44,7 +44,6 @@ public class Conexion {
             usuario = props.getProperty("usuario", "root");
             password = props.getProperty("password", "");
         } catch (IOException ex) {
-            // Si el archivo no existe, usamos valores por defecto y lo creamos
             System.out.println("Archivo de configuración no encontrado, creando uno por defecto con SQLite.");
             tipoDB = "SQLite";
             host = "localhost";
@@ -68,7 +67,6 @@ public class Conexion {
 
         try (FileOutputStream fos = new FileOutputStream(CONFIG_FILE)) {
             props.store(fos, "Configuracion de Base de Datos");
-            // Actualizar las variables de la instancia actual
             this.tipoDB = tipoDB;
             this.host = host;
             this.puerto = puerto;
@@ -112,7 +110,6 @@ public class Conexion {
                 conexion = DriverManager.getConnection(url, usuario, password);
             }
 
-            // Si es SQLite, aseguramos que las tablas existan
             if ("SQLite".equalsIgnoreCase(tipoDB)) {
                 crearTablasSiNoExisten();
             }
@@ -126,7 +123,7 @@ public class Conexion {
         if ("MySQL".equalsIgnoreCase(tipo)) {
             return "jdbc:mysql://" + h + ":" + p + "/" + db + "?useSSL=false&serverTimezone=UTC";
         }
-        return "jdbc:sqlite:" + db + ".db"; // Default a SQLite
+        return "jdbc:sqlite:" + db + ".db";
     }
 
     private String obtenerDriver(String tipo) {
@@ -140,7 +137,6 @@ public class Conexion {
             + "    id INTEGER PRIMARY KEY AUTOINCREMENT,"
             + "    nombres TEXT NOT NULL,"
             + "    apellidos TEXT NOT NULL,"
-            + "    email TEXT UNIQUE,"
             + "    direccion TEXT,"
             + "    telefono TEXT,"
             + "    correo TEXT UNIQUE,"
@@ -148,33 +144,34 @@ public class Conexion {
             + "    fecha_nacimiento DATE,"
             + "    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP"
             + ");",
-            // --- Empleados (Estructura Corregida) ---
+
+            // --- Empleados ---
             "CREATE TABLE IF NOT EXISTS empleados ("
             + "    id INTEGER PRIMARY KEY AUTOINCREMENT,"
             + "    nombres TEXT NOT NULL,"
             + "    apellidos TEXT NOT NULL,"
             + "    email TEXT UNIQUE,"
-            + // Columna 'email' añadida
-            "    telefono TEXT,"
+            + "    telefono TEXT,"
             + "    cargo TEXT,"
             + "    fecha_contratacion DATE,"
             + "    salario REAL,"
             + "    estado BOOLEAN NOT NULL DEFAULT 1"
-            + // Columna 'estado' añadida
-            ");",
-            // --- Usuarios (Estructura Corregida) ---
+            + ");",
+
+            // --- Usuarios (CON LA ESTRUCTURA CORRECTA) ---
             "CREATE TABLE IF NOT EXISTS usuarios ("
             + "    id INTEGER PRIMARY KEY AUTOINCREMENT,"
             + "    nombres TEXT,"
             + "    apellidos TEXT,"
+            + "    email TEXT UNIQUE,"  // <-- Columna añadida para que coincida con el DAO
             + "    usuario TEXT NOT NULL UNIQUE,"
             + "    password TEXT NOT NULL,"
             + "    rol TEXT,"
             + "    activo BOOLEAN NOT NULL DEFAULT 1,"
-            + // Columna 'activo' añadida
-            "    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP"
+            + "    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP"
             + ");",
-            // --- Casos (Con Relaciones) ---
+
+            // --- Casos ---
             "CREATE TABLE IF NOT EXISTS casos ("
             + "    id INTEGER PRIMARY KEY AUTOINCREMENT,"
             + "    titulo TEXT NOT NULL,"
@@ -190,7 +187,8 @@ public class Conexion {
             + "    FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE RESTRICT,"
             + "    FOREIGN KEY (abogado_id) REFERENCES empleados(id) ON DELETE RESTRICT"
             + ");",
-            // --- Audiencias (Con Relaciones) ---
+
+            // --- Audiencias ---
             "CREATE TABLE IF NOT EXISTS audiencias ("
             + "    id INTEGER PRIMARY KEY AUTOINCREMENT,"
             + "    tipo TEXT NOT NULL,"
@@ -205,7 +203,6 @@ public class Conexion {
             + ");"
         };
 
-        // Este bloque try-catch ejecuta cada una de las sentencias SQL para crear las tablas.
         try (Statement stmt = conexion.createStatement()) {
             for (String sql : sqls) {
                 stmt.execute(sql);
@@ -228,27 +225,10 @@ public class Conexion {
     }
 
     // Getters para la configuración actual
-    public String getTipoDB() {
-        return tipoDB;
-    }
-
-    public String getHost() {
-        return host;
-    }
-
-    public String getPuerto() {
-        return puerto;
-    }
-
-    public String getNombreDB() {
-        return nombreDB;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public String getPassword() {
-        return password;
-    }
+    public String getTipoDB() { return tipoDB; }
+    public String getHost() { return host; }
+    public String getPuerto() { return puerto; }
+    public String getNombreDB() { return nombreDB; }
+    public String getUsuario() { return usuario; }
+    public String getPassword() { return password; }
 }
